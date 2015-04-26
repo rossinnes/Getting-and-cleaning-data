@@ -1,57 +1,24 @@
-# Getting-and-cleaning-data
-assignment week 3
+Getting and Cleaning Data: Course Project
+Introduction
 
-Run_Analysis.R R-script on Human Activity Recognition Using Smartphones Dataset
+This repository contains my work for the course project for the Coursera course "Getting and Cleaning data", part of the Data Science specialization. What follows first are my notes on the original data.
 
-Version 1.0
-by Ross Innes
-The run_analysis.R script reads data from the "Human Activity Recognition Using Smartphones Dataset Version 1.0" and produces a new - tidy - dataset which may be used for further analysis.
+About the raw data
 
-The data in the "Human Activity Recognition Using Smartphones Dataset Version 1.0" have been taken from experiments carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz data were captured. The experiments were video-recorded to label the data manually. The obtained dataset was randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.
+The features (561 of them) are unlabeled and can be found in the x_test.txt. The activity labels are in the y_test.txt file. The test subjects are in the subject_test.txt file.
 
-The original dataset included the following data files:
-'features.txt': List of all features.
+The same holds for the training set.
 
-'activity_labels.txt': List of class labels and their activity name.
+About the script and the tidy dataset
 
-'train/X_train.txt': Training set.
+I created a script called run_analysis.R which will merge the test and training sets together. Prerequisites for this script:
 
-'train/y_train.txt': Training labels.
+the UCI HAR Dataset must be extracted and..
+the UCI HAR Dataset must be availble in a directory called "UCI HAR Dataset"
+After merging testing and training, labels are added and only columns that have to do with mean and standard deviation are kept.
 
-'train/subject_train.txt': ID's of subjects in the training data
+Lastly, the script will create a tidy data set containing the means of all the columns per test subject and per activity. This tidy dataset will be written to a tab-delimited file called tidy.txt, which can also be found in this repository.
 
-'test/X_test.txt': Test set.
+About the Code Book
 
-'test/y_test.txt': Test labels.
-
-'test/subject_test.txt': ID's of subjects in the training data
-
-For more information about the "Human Activity Recognition Using Smartphones Dataset Version 1.0" contact: activityrecognition@smartlab.ws
-
-A brief description of the script:
-The run_analysis.R script merges data from a number of .txt files and produces a tidy data set which may be used for further analysis.
-
-First it checks to see if the required "reshape2" has been installed and then loads the "reshape2" package.
-
-It then reads all required .txt files and labels the datasets
-
-Consquently the appropriate "activity_id"'s and "subject_id"'s are appended to the "test" and the "training" data, which are then combined into one single data frame
-
-Using the "grep" function, all the columns with mean() and std() values are extracted and then a new data frame, including only the "activity_id", the "subject_id" and the mean() and std() columns, is created
-
-Using the "merge" function, descriptive activity names are merged with the mean/std values dataset, to get one dataset with descriptive activity names
-
-Lastly, with the help of the "melt" and "dcast" functions of the "reshape2" package, the data is converted into a table containing mean values of all the included features, ordered by the activity name and the subject id, and the data is written to the "tidy_movement_data.txt" file.
-
-A description of the "tidy_movement_data.txt" file may be found in the "CodeBook.md" file.
-
-
-
-License:
-Use of the Run_Analysis.R script is free for all users.
-
-Use of the resulting dataset "tidy_movement_data.txt" in publications must be acknowledged by referencing the following publication [1]
-
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the author for its use or misuse. Any commercial use is prohibited.
+The CodeBook.md file explains the transformations performed and the resulting data and variables.
